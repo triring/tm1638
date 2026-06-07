@@ -55,7 +55,7 @@ func (d *Device) Setup() {
 
 // Set the display brightness 0-7.
 // 
-// 表示のかkるさを設定します。設定範囲は、0-7までです。
+// 表示の明るさを設定します。設定範囲は、0-7までです。
 func (d *Device) SetBrightness(val byte) {
 	// brightness 0 = 1/16th pulse width
 	// brightness 7 = 14/16th pulse width

@@ -26,10 +26,6 @@ func main() {
 	clkPin = machine.GP27
 	dioPin = machine.GP26
 
-	stbPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	clkPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	dioPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-
 	TM1638 := tm1638.New(stbPin, clkPin, dioPin)
 	TM1638.Setup()
 	for {
