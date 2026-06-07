@@ -1,0 +1,62 @@
+package main
+
+/*
+> go mod init main
+> go mod tidy
+> tinygo flash --target=pico --size short -monitor .
+> tinygo build -o DispNum.uf2 --target=pico --size short .
+*/
+
+import (
+//	"fmt"
+	"machine"
+	"math/rand"
+	"time"
+	// "tm1638" // ローカルのディレクトリに置かれたtm1638のパッケージをインポートする場合
+	"github.com/triring/tm1638" // githubで公開しているパッケージをインポートする場合
+)
+
+var (
+	stbPin machine.Pin
+	clkPin machine.Pin
+	dioPin machine.Pin
+)
+
+func main() {
+	// ピンの初期化（ピン番号はPicoの実際の配線に合わせて変更してください）
+	stbPin = machine.GP28
+	clkPin = machine.GP27
+	dioPin = machine.GP26
+
+	stbPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	clkPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	dioPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	TM1638 := tm1638.New(stbPin, clkPin, dioPin)
+	TM1638.Setup()
+
+	for i := 0; i < 3; i++ {
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(124))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(88888))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(77777777))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(12345678))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(88888888))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(99999989))
+		time.Sleep(1 * time.Second)
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(100000000))
+		time.Sleep(1 * time.Second)
+	}
+	// 以下は、乱数を表示し続ける。
+	rand.Seed(time.Now().UnixNano())  // 現在の時刻をシードとして設定
+	for {
+		randomInt := rand.Intn(99999999) 
+		TM1638.Disp7SEGs(TM1638.IntTo7Seg(randomInt))
+		time.Sleep(1 * time.Second)
+	}
+	
+}

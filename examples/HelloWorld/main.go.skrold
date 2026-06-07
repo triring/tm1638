@@ -1,0 +1,53 @@
+package main
+
+/*
+> go mod init main
+> go mod tidy
+> tinygo flash --target=pico --size short -monitor .
+> tinygo build -o HelloWorld.uf2 --target=pico --size short .
+*/
+
+import (
+	"machine"
+	"time"
+	// "tm1638" // ローカルのディレクトリに置かれたledのパッケージをインポートする場合
+	"github.com/triring/tm1638" // githubで公開しているパッケージをインポートする場合
+)
+
+var (
+	stbPin machine.Pin
+	clkPin machine.Pin
+	dioPin machine.Pin
+)
+
+func main() {
+	// ピンの初期化（ピン番号はPicoの実際の配線に合わせて変更してください）
+	stbPin = machine.GP28
+	clkPin = machine.GP27
+	dioPin = machine.GP26
+
+	stbPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	clkPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	dioPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+
+	TM1638 := tm1638.New(stbPin, clkPin, dioPin)
+
+	// 7セグでアルファベットを表示するためのセグメントパターン
+	// 限られた7セグ点灯パターンの中でアルファベットに近いパターンを選んでいる。
+	textHello := [8]byte{
+		/*H*/ /*E*/ /*L*/ /*L*/ /*O*/ /* */ /* */ /* */
+		0x76, 0x79, 0x38, 0x38, 0x3F, 0x00, 0x00, 0x00,
+	}
+
+	textWorld := [8]byte{
+		/* */ /* */ /*U*/ /*U*/ /*O*/ /*r*/ /*L*/ /*d*/
+		0x00, 0x00, 0x3C, 0x1E, 0x5C, 0x50, 0x30, 0x5E,
+	}
+
+	for {
+		TM1638.Disp7SEGs(textHello)
+		time.Sleep(2 * time.Second)
+		TM1638.Disp7SEGs(textWorld)
+		time.Sleep(2 * time.Second)
+	}
+}
