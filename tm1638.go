@@ -222,6 +222,30 @@ func (d *Device) Disp7SEG(segments byte, position int) {
 	// cmdDisplayOnOff  = 0x08 // ディスプレイ制御 (表示ON_OFF)
 }
 
+// Scroll text display
+//
+// 文字列のスクロール表示
+// scrollTextData: 表示する文字列データ
+// interval: 文字の表示間隔(単位は、ms)
+func (d *Device) ScrollingText(scrollTextData []byte, interval time.Duration) {
+	scrollLength := len(scrollTextData)
+	var index int = 0
+	var dispData [8]byte
+	for {
+		for i := 0; i < 8; i++ {
+			dispData[i] = scrollTextData[index+i]
+		//	fmt.Printf("%c ", dispData[i])
+		}
+	//	fmt.Printf("\n")
+		d.Disp7SEGs(dispData)
+		time.Sleep(interval * time.Millisecond)
+		index++
+		if index > (scrollLength - 8) {
+			break
+		}
+	}
+}
+
 // Sends 1 byte of data to tm1638.
 //
 // データ送信 (shift_out相当)

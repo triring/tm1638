@@ -57,6 +57,5 @@ func main() {
 		randomInt := rand.Intn(99999999) 
 		TM1638.Disp7SEGs(TM1638.IntTo7Seg(randomInt))
 		time.Sleep(1 * time.Second)
-	}
-	
+	}	
 }
