@@ -36,5 +36,5 @@ go.work.sum
 *.bak
 *.ps1
 *.zip
-.backup/
-.ForgeRoom/
+backup/
+ForgeRoom/
