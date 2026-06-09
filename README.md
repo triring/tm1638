@@ -66,19 +66,25 @@ D:.
 |   tm1638.go
 |
 +---examples
-    +---DispNum
+    +---Blink8LED   (8連LEDの点滅)
     |       main.go
     |
-    +---HelloWorld
+    +---Brightness   (表示輝度設定の変更)
     |       main.go
     |
-    +---Keytest
+    +---DispNum   (整数の表示)
     |       main.go
     |
-    +---LEDtest
+    +---HelloWorld   (7セグで擬似アルファベットの表示)
     |       main.go
     |
-    \---ScrollingText
+    +---Keytest     (キー入力テスト)
+    |       main.go
+    |
+    +---LEDtest     (LEDの点滅テスト)
+    |       main.go
+    |
+    \---ScrollingText   (文字列のスクロール表示)
             main.go
 ```
 
