@@ -61,6 +61,8 @@ func main() {
 	TM1638.ScrollingText(scrollTextData, 750)	//	表示インターバル	750ms
 	TM1638.ScrollingText(scrollTextData, 500)	//	表示インターバル	500ms
 	TM1638.ScrollingText(scrollTextData, 250)	//	表示インターバル	250ms
+	TM1638.Disp7SEGs(textASAP)
+	time.Sleep(2000 * time.Millisecond)
 	fmt.Printf("Pulse pattern\n")
 	for i := 0; i < 20; i++ {
 		TM1638.ScrollingText(scrollPulseData, 100)

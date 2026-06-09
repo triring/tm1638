@@ -2,8 +2,11 @@
 
 This repository publishes drivers for controlling the TM1638, created using tinygo.  
 The TM1638 is an LED driver controller with a key scan interface.  
-このリポジトリでは、tinygoで作成したTM1638を制御するドライバを公開しています。  
+このリポジトリでは、**tinygo**で作成したTM1638を制御するドライバを公開しています。  
 TM1638はキースキャンインターフェースを備えたLEDドライバコントローラです。  
+
+![TM1638](./images/R0010480_800x600.jpg)
+
 このコントローラは、「ストローブ(STB)」「クロック(CLK)」「データ(DIO)」のわずか3本の信号線で接続するだけで、複数の7セグメントLEDとスイッチ、LEDを同時に制御できます。  
 また、このコントローラ内部で自動的にダイナミック点灯（スキャン表示）とキー入力のスキャンを行うため、マイコン側の負荷を大幅に軽減してくれます。  
 ArduinoやMicroPythonで、このデバイスをコントロールするドライバやライブラリはたくさんあったのですが、tinygoで書かれたものが見当たらなかったので、このパッケージを自作してみました。  
@@ -12,6 +15,9 @@ ArduinoやMicroPythonで、このデバイスをコントロールするドラ�
 ## ハードウェア
 
 以下のamazonで購入したTM1638の評価ボードを使用しました。2個で1000円弱でした。  
+
+![TM1638](./images/DSCN0878_800x600.jpg)
+
 検証用に使用したマイコンボードは、Raspberry Pi Picoで、これらを、以下のように接続しました。  
 
 | TM1638 | Raspberry Pi Pico |
@@ -25,9 +31,16 @@ ArduinoやMicroPythonで、このデバイスをコントロールするドラ�
 この接続は、I2CやSPIではなく、独自のプロトコルで通信しており、汎用入出力端子に割り当てればOKです。
 使用するマイコンボードの空き端子に合わせて、配線して下さい。
 
+このTM1638の評価ボードには、以下のようなパーツが搭載されています。
+
+* 7セグメントLED    x   8
+* LED   x   8
+* Key   x   8
+
+
 ## ソフトウェア
 
-開発には、以下のバージョンの go と tinygo を使用しました。
+開発に使用した go と tinygo のバージョンは以下の通りです。  
 
     > go version
     go version go1.26.4 windows/amd64
@@ -117,7 +130,6 @@ func main() {
 ```
 ## メソッドの使い方
 
-準備中
 ### 初期化等の基本制御
 
 * func New(stbPin machine.Pin, clkPin machine.Pin, dioPin machine.Pin) Device

@@ -232,25 +232,6 @@ func (d *Device) ScrollingText(scrollTextData []byte, interval time.Duration) {
 	}
 }
 
-// ScanKeys Return a byte representing which keys are pressed. LSB is SW1
-// 
-// 8個のキーのうち、押されているキーの状態を1byteのデータとして返します。LSBはSW1です。
-func (d *Device) ScanKeys() byte {
-	var keys byte = 0
-	var i byte
-	d.stbPin.Low()
-	time.Sleep(tmDelay)
-	d.shift_out(cmdDataRead)
-	time.Sleep(tmDelay)
-	d.dioPin.Configure(machine.PinConfig{Mode: machine.PinInput})
-	for i = 0; i < 4; i++ {
-		keys |= (d.shift_in() << i)
-	}
-	d.dioPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
-	d.stbPin.High()
-	return keys
-}
-
 // Set the value of a single LED.
 //
 // 指定する1つのLEDの値を設定します。
@@ -289,5 +270,25 @@ func (d *Device) ClearLEDs() {
 	for i := 0; i < 8; i++ {
 		d.SetLED(0, byte(i))
 	}
+}
+
+
+// ScanKeys Return a byte representing which keys are pressed. LSB is SW1
+// 
+// 8個のキーのうち、押されているキーの状態を1byteのデータとして返します。LSBはSW1です。
+func (d *Device) ScanKeys() byte {
+	var keys byte = 0
+	var i byte
+	d.stbPin.Low()
+	time.Sleep(tmDelay)
+	d.shift_out(cmdDataRead)
+	time.Sleep(tmDelay)
+	d.dioPin.Configure(machine.PinConfig{Mode: machine.PinInput})
+	for i = 0; i < 4; i++ {
+		keys |= (d.shift_in() << i)
+	}
+	d.dioPin.Configure(machine.PinConfig{Mode: machine.PinOutput})
+	d.stbPin.High()
+	return keys
 }
 
