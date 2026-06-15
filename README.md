@@ -69,23 +69,29 @@ D:.
     +---Blink8LED   (8連LEDの点滅)
     |       main.go
     |
-    +---Brightness   (表示輝度設定の変更)
+    +---Brightness  (表示輝度設定の変更)
     |       main.go
     |
-    +---DispNum   (整数の表示)
+    +---DispNum     (整数の表示)
     |       main.go
     |
-    +---HelloWorld   (7セグで擬似アルファベットの表示)
+    +---HelloWorld      (7セグで擬似アルファベットの表示)
     |       main.go
     |
-    +---Keytest     (キー入力テスト)
+    +---Keytest         (キー入力テスト)
     |       main.go
     |
-    +---LEDtest     (LEDの点滅テスト)
+    +---LEDtest         (LEDの点滅テスト)
     |       main.go
     |
-    \---ScrollingText   (文字列のスクロール表示)
+    +---ScrollingText   (文字列のスクロール表示)
+    |       main.go
+    |
+    \---TowerOfHanoi    (ハノイの塔：3枚の円盤を移動)
             main.go
+
+└─
+
 ```
 
 コピーしたディレクトリ内に、examplesディレクトリがあります。
@@ -94,7 +100,14 @@ D:.
 1. ターゲットボードとtm1638評価ボードを3本の信号線、電源、GND線で接続して下さい。
 2. PCとターゲットボードをUSBケーブルで接続して下さい。
 3. 実行したいコードのあるディレクトリ内に移動して下さい。
-4. 以下のコマンドで、コンパイル&実行ファイルの転送を行って下さい。  
+4. 最初に、1度だけ以下のコマンドを実行して下さい。
+
+```bash
+go mod init main
+go mod tidy
+go get github.com/triring/tm1638
+```
+5. 以下のコマンドで、コンパイル&実行ファイルの転送を行って下さい。  
 (-targetオプションは、使用するマイコンボードに合わせて修正して下さい。)
 
 ```bash
@@ -222,29 +235,32 @@ func main() {
 
 ## サンプルコードについて
 
-[Blink8LED/main.go](Blink8LED/main.go)  
+[Blink8LED](examples/Blink8LED/main.go)  
 
     8連LEDを点滅させます。
 
-[DispNum/main.go](DispNum/main.go)  
+[DispNum](examples/DispNum/main.go)  
 
     7セグに数字の表示します。
 
-[HelloWorld/main.go](HelloWorld/main.go)  
+[HelloWorld](examples/HelloWorld/main.go)  
 
     7セグに文字列"Hello"を疑似アルファベットで表示します。
 
-[Keytest/main.go](Keytest/main.go)  
+[Keytest](examples/Keytest/main.go)  
 
     8個のキーの入力状態を読取ります。押されているキーに対応するLEDを消灯します。
 
-[LEDtest/main.go](LEDtest/main.go)  
+[LEDtest](examples/LEDtest/main.go)  
 
     8連LEDをいろいろなパターンで点滅させます。
 
-[ScrollingText/main.go](ScrollingText/main.go)  
+[ScrollingText](examples/ScrollingText/main.go)  
 
     7セグに文字列を疑似アルファベットでスクロール表示します。
+
+[TowerOfHanoi](examples/TowerOfHanoi/main.go)  
+    7セグでハノイの塔を実行します。3枚の円盤を移動していきます。
 
 ## このパッケージのドキュメント
 
