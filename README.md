@@ -72,6 +72,12 @@ D:.
     +---Brightness  (表示輝度設定の変更)
     |       main.go
     |
+    +---CalcPi      (Piの近似値を計算)
+    |       main.go
+    |
+    +---DispFont    (英数字、記号の表示)
+    |       main.go
+    |
     +---DispNum     (整数の表示)
     |       main.go
     |
@@ -79,6 +85,9 @@ D:.
     |       main.go
     |
     +---Keytest         (キー入力テスト)
+    |       main.go
+    |
+    +---KnightRider     (LEDの点滅デモ)
     |       main.go
     |
     +---LEDtest         (LEDの点滅テスト)
@@ -89,9 +98,6 @@ D:.
     |
     \---TowerOfHanoi    (ハノイの塔：3枚の円盤を移動)
             main.go
-
-└─
-
 ```
 
 コピーしたディレクトリ内に、examplesディレクトリがあります。
@@ -239,6 +245,18 @@ func main() {
 
     8連LEDを点滅させます。
 
+[Brightness](examples/Brightness/main.go)  
+
+    表示輝度設定を変更します。
+
+[CalcPi](examples/CalcPi/main.go)  
+
+    Piの近似値を計算します。
+
+[DispFont](examples/DispFont/main.go)  
+
+    7セグに疑似アルファベット、数字、記号を表示します。
+
 [DispNum](examples/DispNum/main.go)  
 
     7セグに数字の表示します。
@@ -251,6 +269,10 @@ func main() {
 
     8個のキーの入力状態を読取ります。押されているキーに対応するLEDを消灯します。
 
+[KnightRider](examples/KnightRider/main.go)  
+
+    アメリカの特撮テレビドラマ『ナイトライダー』で活躍する「ナイト2000」という車両のフロントで点滅する赤い光を8連LEDで再現してみました。  
+
 [LEDtest](examples/LEDtest/main.go)  
 
     8連LEDをいろいろなパターンで点滅させます。
@@ -260,7 +282,8 @@ func main() {
     7セグに文字列を疑似アルファベットでスクロール表示します。
 
 [TowerOfHanoi](examples/TowerOfHanoi/main.go)  
-    7セグでハノイの塔を実行します。3枚の円盤を移動していきます。
+
+    7セグでハノイの塔を実行します。3枚の円盤を順次移動していきます。
 
 ## このパッケージのドキュメント
 

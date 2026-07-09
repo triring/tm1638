@@ -54,7 +54,7 @@ var CharTo7Seg map[rune]byte = map[rune]byte{
 	'g': 0x3D, // 0b00111101
 	'h': 0x74, // 0b01110100
 	'i': 0x04, // 0b00000100
-	'j': 0x1E, // 0b00011110
+	'j': 0x0E, // 0b00001110
 	'k': 0x76, // 0b01110110
 	'l': 0x30, // 0b00110000
 	'm': 0x55, // 0b01010101
@@ -76,6 +76,7 @@ var CharTo7Seg map[rune]byte = map[rune]byte{
 	'*': 0x63, // 0b01100011
 	'=': 0x48, // 0b01001000
 	'.': 0x80, // 0b10000000
+	'!': 0x86, // 0b10000000
 }
 
 // Converts a single character to 7-segment data.
